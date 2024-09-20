@@ -9,13 +9,16 @@ export class AppController {
   @Render('index')
   findAll() {
     return {
-      quotes: this.appService.findAll()
-    }
+      quotes: this.appService.findAll(),
+    };
   }
 
-  @Get('quote/:id')
+  @Get('/quote/:id')
+  @Render('findone')
   oneQuote(@Param('id') id: string) {
-    return this.appService.oneQuote(+id);
+    return {
+      theone: this.appService.oneQuote(+id),
+    };
   }
 
   @Delete('deleteQuote/:id')
@@ -23,13 +26,19 @@ export class AppController {
     return this.appService.deleteQuote(+id);
   }
 
-  @Get('randomQuote')
+  @Get('/randomQuote')
+  @Render('random')
   randomQuote() {
-    return this.appService.randomQuote();
+    return {
+      random: this.appService.randomQuote(),
+    };
   }
 
-  @Get('topAuthor')
+  @Get('/topAuthor')
+  @Render('topauth')
   topAuthor() {
-    return this.appService.topAuthor();
+    return {
+      topauth: this.appService.topAuthor(),
+    };
   }
 }
